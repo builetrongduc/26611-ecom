@@ -67,6 +67,12 @@ To calculate the actual product prices, use the formulas below:
 - **Line 2:** Two items of this product were purchased, and there was a retail discount applied due to a loyalty card. To determine the regular shelf price of the product (exclusive of loyalty card discount), take the sum of the amount paid and the discount, then divide by the quantity: `($2 + $1.34) / 2 = $1.67`. The shelf price of the product including loyalty card discount is `$2 / 2 = $1`. The customer paid `$2` for both products, which is the same amount the retailer received.
 - **Line 3:** The actual shelf price of each product here is `($2.89 + $0.45) / 2 = $1.67`. The customer paid `$2.34` (`$2.89 - $0.55`) for these products, but the retailer will receive `$2.89` due to the manufacturer discount.
 
+| Household Key | Basket ID | Day | Product ID | Quantity | Sales Value | Store ID | Retail Disc | Trans Time | Week No | Coupon Disc | Coupon Match Disc |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 2381 | 35730137393 | 534 | 819063 | 1 | 1.67 | 32004 | 0 | 2025 | 77 | 0 | 0 |
+| 1431 | 41756231898 | 671 | 819063 | 2 | 2 | 446 | -1.34 | 1740 | 97 | 0 | 0 |
+| 888 | 36027750817 | 540 | 819063 | 2 | 2.89 | 401 | 0 | 1254 | 78 | -0.55 | -0.45 |
+
 ---
 
 ## `hh_demographic`
@@ -75,18 +81,14 @@ To calculate the actual product prices, use the formulas below:
 
 | Variable | Description |
 |---|---|
-| `HOUSEHOLD_KEY` | Uniquely identifies each household |
-| `BASKET_ID` | Household level demographic segmentation. Values have meaningful order. Possible values: Group1 through Group6. |
-| `DAY` | Household level demographic segmentation. Possible values: X, Y and Z. |
-| `PRODUCT_ID` | Household level demographic segmentation. Values have meaningful order. Possible values: Level1 through Level12. |
-| `QUANTITY` | Household level demographic segmentation. Values have meaningful order. Possible values: 1 through 5+. |
-| `SALES_VALUE` | Household level demographic segmentation. Values have meaningful order. Possible values: Group1 through Group6. |
-| `STORE_ID` | Household level demographic segmentation. Values have meaningful order. Possible values: Group1 through Group5. |
-| `COUPON_MATCH_DISC` | Household level demographic segmentation. Values have meaningful order. Possible values: 1, 2, 3, None/Unknown. |
-| `COUPON_DISC` | Discount applied due to manufacturer coupon |
-| `RETAIL_DISC` | Discount applied due to retailer’s loyalty card programme |
-| `TRANS_TIME` | Time of day when transaction occurred |
-| `WEEK_NO` | Week of the transaction. Ranges 1–102 |
+| `household_key` | Uniquely identifies each household |
+| `classification_1` | Household level demographic segmentation. Values have meaningful order. Possible values: Age Group1 through Age Group6. |
+| `classification_2` | Household level demographic segmentation. Possible values: X, Y and Z. |
+| `classification_3` | Household level demographic segmentation. Values have meaningful order. Possible values: Level1 through Level12. |
+| `classification_4` | Household level demographic segmentation. Values have meaningful order. Possible values: 1 through 5+. |
+| `classification_5` | Household level demographic segmentation. Values have meaningful order. Possible values: Group1 through Group6. |
+| `HOMEOWNER_DESC` | Household level demographic segmentation. Values have meaningful order. Possible values: 'Homeowner', 'Unknown', 'Renter', 'Probable Renter', 'Probable Owner'. |
+| `KID_CATEGORY_DESC` | Household level demographic segmentation. Values have meaningful order. Possible values: 1, 2, 3+, None/Unknown. |
 
 > **Note:** The guide presents the `hh_demographic` variable descriptions as shown above.
 
@@ -137,7 +139,7 @@ To calculate the actual product prices, use the formulas below:
 
 **Description:** This table lists all the coupons sent to customers as part of a campaign, as well as the products for which each coupon is redeemable. Some coupons are redeemable for multiple products. One example is a coupon for any private label frozen vegetable. There are a large number of products where this coupon could be redeemed.
 
-For campaign TypeA, this table provides the pool of possible coupons.
+For campaign TypeA, this table provides the pool of possible coupons. Each customer participating in a TypeA campaign received 16 coupons out of the pool. The 16 coupons were selected based on the customer’s prior purchase behaviour. Identifying the specific 16 coupons that each customer received is outside the scope of this database. For campaign TypeB and TypeC, all customers participating in a campaign receives all coupons pertaining to that campaign.
 
 | Variable | Description |
 |---|---|
